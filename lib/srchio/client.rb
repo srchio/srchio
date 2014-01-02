@@ -126,6 +126,10 @@ options:
         raise ArgumentError, "Opts must contain at least one of: :query, :body, :title, :tags, :remote_id, :id"
       end
       
+      if opts[:tags].is_a?(Array)
+        opts[:tags] = opts[:tags].join(",")
+      end
+      
       Srchio::Response.new(self.class.get("/api/searchers/#{searcher_id}/search", :query => opts))
     end
   end

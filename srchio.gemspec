@@ -7,6 +7,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Kevin Lawver"]
   s.email       = ["support@srch.io"]
+  s.licenses    = ["MIT"]
   s.homepage    = "http://github.com/railsmachine/srchio"
   s.summary     = %q{The official gem for srch.io! Makes searching fun and easy.}
   s.description = %q{The official gem and wrapper for the srch.io API. More info @ http://srch.io}
