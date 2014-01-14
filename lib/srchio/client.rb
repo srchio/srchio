@@ -84,6 +84,7 @@ options:
 * :body: required, the body of the document
 * :tags: optional, the list of tags for the document.
 * :remote_id: optional, but recommended, the id of the document in your system.
+* :created: optional - the timestamp for the record.
 =end
     def add_document(opts={})
       raise ArgumentError, ":title is required" if opts[:title].nil?
