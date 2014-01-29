@@ -18,7 +18,11 @@ module Srchio
       if r['results'].is_a?(Array)
         @results = []
         r['results'].each do |result|
-          @results << Srchio::Result.new(result)
+          if result['tag']
+            @results << Srchio::Tag.new(result)
+          else
+            @results << Srchio::Result.new(result)
+          end
         end
       end
     end

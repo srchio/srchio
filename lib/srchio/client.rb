@@ -44,7 +44,7 @@ module Srchio
     end
 
     def self.update_base_uri
-      base_uri = "#{self.api_protocol}://#{self.api_domain}/"
+      base_uri "#{self.api_protocol}://#{self.api_domain}/"
       true
     end
 
@@ -132,6 +132,15 @@ options:
       end
       
       Srchio::Response.new(self.class.get("/api/searchers/#{searcher_id}/search", :query => opts))
+    end
+ 
+=begin rdoc
+Returns the tag cloud for your searcher. It will only return the number of unique tags you have that appear in at least one document.
+options:
+* :n: The number of tags to return.  Defaults to 1,000.  
+=end    
+    def tag_cloud(opts={})
+      Srchio::Response.new(self.class.get("/api/searchers/#{searcher_id}/tag_cloud", :query => opts))
     end
   end
 end

@@ -96,7 +96,17 @@ options:
 			def srch(opts={})
 				srch_client.search(opts)
 			end
-		
+
+=begin rdoc
+tag_cloud: Return the tags for your searcher.
+
+options:
+* n: The number of tags to return.  Defaults to 1,000.
+=end
+      def tag_cloud(opts={})
+        srch_client.tag_cloud(opts)
+      end
+      
 =begin rdoc
 srch_destroy: Destroy a document.
 

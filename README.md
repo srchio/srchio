@@ -32,7 +32,8 @@ client.add_document(
   tags: ['fun', 'api', 'awesome']
 )
 
-client.search(query: "fun")</code></pre>
+client.search(query: "fun")
+client.tag_cloud</code></pre>
 
 If you need to delete a document, you can do it either with your remote_id or the index_id returned in the add_document call:
 
@@ -43,7 +44,10 @@ If you need to delete a document, you can do it either with your remote_id or th
 Since we're so nice, we went ahead and created a handy ActiveSupport::Concern to include in your models to get all the srch.io goodness right in your model and the make wiring things up faster.  Here's how you'd use it in a standard ActiveRecord model:
 
 <pre><code>class Foo &lt; ActiveRecord::Base
-	# Tell srchio where to get the fields to index (these are the methods on your model that provide those values, like foo.id):
+	include Srchio::Concern
+	
+	# Tell srchio where to get the fields to index 
+	# (these are the methods on your model that provide those values, like foo.id):
 	
 	configure_srch searcher_id: 1,
 		title: :foo_title,
