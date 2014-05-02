@@ -4,7 +4,7 @@ module Srchio
 
     attr_accessor :searcher_id, :api_token, :api_domain, :api_protocol
 
-    base_uri "https://srch.io/"
+    base_uri "https://api.srch.io/api/v1/"
 
     def self.api_protocol
       @@api_protocol ||= "https"
@@ -44,7 +44,7 @@ module Srchio
     end
 
     def self.update_base_uri
-      base_uri "#{self.api_protocol}://#{self.api_domain}/"
+      base_uri "#{self.api_protocol}://#{self.api_domain}/api/v1/"
       true
     end
 
@@ -73,7 +73,7 @@ options:
 Sends a test request, making sure you're sending the api token correctly
 =end
     def test
-      Srchio::Response.new(self.class.get("/api/test"))
+      Srchio::Response.new(self.class.get("/test"))
     end
 
 =begin rdoc
@@ -95,7 +95,9 @@ options:
         opts[:tags] = opts[:tags].join(",")
       end
       
-      Srchio::Response.new(self.class.post("/api/searchers/#{searcher_id}/documents", :query => opts))
+      doc = opts.to_json
+      
+      Srchio::Response.new(self.class.post("/searchers/#{searcher_id}/documents", :body => doc))
     end
 
 =begin rdoc
@@ -107,7 +109,7 @@ options: One of the following is required.
     def destroy_document(opts={})
       raise ArgumentError if opts[:remote_id].nil? && opts[:index_id].nil?
       
-      Srchio::Response.new(self.class.delete("/api/searchers/#{searcher_id}/documents", :query => opts))
+      Srchio::Response.new(self.class.delete("/searchers/#{searcher_id}/documents", :query => opts))
     end
 
 =begin rdoc
@@ -131,7 +133,7 @@ options:
         opts[:tags] = opts[:tags].join(",")
       end
       
-      Srchio::Response.new(self.class.get("/api/searchers/#{searcher_id}/search", :query => opts))
+      Srchio::Response.new(self.class.get("/searchers/#{searcher_id}/search", :query => opts))
     end
  
 =begin rdoc
@@ -140,7 +142,7 @@ options:
 * :n: The number of tags to return.  Defaults to 1,000.  
 =end    
     def tag_cloud(opts={})
-      Srchio::Response.new(self.class.get("/api/searchers/#{searcher_id}/tag_cloud", :query => opts))
+      Srchio::Response.new(self.class.get("/searchers/#{searcher_id}/tag_cloud", :query => opts))
     end
   end
 end
