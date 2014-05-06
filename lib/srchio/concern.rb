@@ -77,7 +77,7 @@ options:
 srch_client: The client used to do all the API calls.  The concern provides method wrappers for everything, so you probably don't need to call this directly.
 =end			
 			def srch_client
-				@@client ||= Srch::Client.new(:searcher_id => srch_config[:searcher_id])
+				@@client ||= Srchio::Client.new(:searcher_id => srch_config[:searcher_id])
 			end
 
 =begin rdoc
